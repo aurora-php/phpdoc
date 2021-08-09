@@ -1,3 +1,3 @@
 # Octris project documentation
 
-https://octris.github.io/phpdoc/
+https://octris.github.io/phpdoc/index.html
