@@ -8,7 +8,7 @@
 #
 
 if [ "$1" = "" ]; then
-  echo "usage: update.sh <path>"
+  echo "usage: update.sh <path> [<path> ...]"
   exit
 fi
 
@@ -18,13 +18,15 @@ else
   (cd gh-pages && git pull)
 fi
 
-target_dir=$(pwd)/gh-pages/$(basename $1)
+for i in $@; do
+  target_dir=$(pwd)/gh-pages/$(basename $i)
 
-if [ ! -d $target_dir ]; then
-  mkdir $target_dir
-fi
+  if [ ! -d $target_dir ]; then
+    mkdir $target_dir
+  fi
 
-phpdoc -d $1 -t $target_dir
+  phpdoc -d $1 -t $target_dir
+done
 
 exec 3> $(pwd)/gh-pages/index.html
 
